@@ -1,13 +1,13 @@
 remotes {
     local {
         host = '127.0.0.1'
-        user = 'dharmeshsing'
-        password = 'Angellus1'
+        user = 'emily'
+		identity = file(System.getProperty("user.home") + '/.ssh/id_rsa')
     }
 }
 
 task deployLocal << {
-    cleanDirectory(remotes.local)
+    //cleanDirectory(remotes.local)
     copyFiles(remotes.local)
 }
 

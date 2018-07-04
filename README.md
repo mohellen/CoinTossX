@@ -10,15 +10,19 @@ java version "1.8.0_60"
 ```
 Clone the repository
 ```sh
-git clone https://github.com/dharmeshsing/CoinTossX.git
+git clone https://github.com/mohellen/CoinTossX.git
 ```
-Build the project
+Build the project (excluding tests)
 ```sh
 gradle build -x test
 ```
 Deploy to the University server
 ```sh
 gradle -PenvProp=local.properties -PsoftwarePath=/tmp clean installDist bootRepackage copyResourcesToInstallDir copyToDeploy deleteDeployZip deployZip deployToWitsServer 
+```
+Deploy to the CHPC server
+```sh
+gradle -PenvProp=chpcServer.properties clean installDist bootRepackage copyResourcesToInstallDir copyToDeploy deleteDeployZip deployZip deployToCHPCServer
 ```
 Start the Gateways on the server using the start scripts
 ```sh

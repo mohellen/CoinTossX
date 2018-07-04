@@ -1,7 +1,7 @@
 environments {
     local {
         ext.envProp = 'local.properties'
-        ext.softwarePath = '/Users/dharmeshsing/Documents/Masters/tmp'
+        ext.softwarePath = System.getProperty("user.home") + '/workspace/cointossx'
     }
 
     windows {
@@ -16,6 +16,6 @@ environments {
 
     chpc {
         ext.envProp = 'chpcServer.properties'
-        ext.softwarePath = '/home/dsing/Simulation'
+        ext.softwarePath = '/home/amo-hellenbrand/workspace/cointossx'
     }
 }

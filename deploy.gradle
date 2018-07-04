@@ -1,41 +1,35 @@
 remotes {
-    gatewayHost {
-        host = 'hydra0.ms.wits.ac.za'
-        user = '1133465'
-        password = 'ootahvai'
-    }
-
-    wits {
-        host = 'infrastructure-backup.ms.wits.ac.za'
-        user = '1133465'
-        password = 'ootahvai'
-        gateway = remotes.gatewayHost
+    chpc {
+        host = 'lengau.chpc.ac.za'
+        user = 'amo-hellenbrand'
+        identity = file(System.getProperty("user.home") + '/.ssh/id_rsa')
         knownHosts = allowAnyHosts
     }
 }
 
-//ssh 1133465@infrastructure-backup.ms.wits.ac.za
-
-task deployToWitsServer << {
-    cleanDirectory(remotes.wits)
-    copyFiles(remotes.wits)
+task deployToCHPCServer << {
+    cleanDirectory(remotes.chpc)
+    copyFiles(remotes.chpc)
+	execute 'rm ' + rootProject.projectDir.absolutePath + '/deploy.zip'
 }
 
-task openShhTunnel(type:Exec) {
-    executable 'ssh -vvvvv -N -L 8080:infrastructure-backup.ms.wits.ac.za:8080 1133465@hydra0.ms.wits.ac.za'
-}
 
 def cleanDirectory(def server){
     ssh.run {
         session(server) {
-            logger.lifecycle("Stop engines ...")
-            try {
-                execute project.softwarePath + '/scripts/stopAll.sh'
-            }catch(Exception e){}
+          //  logger.lifecycle("Stop engines ...")
+          //  try {
+          //      execute project.softwarePath + '/scripts/stopAll.sh'
+          //  }catch(Exception e){}
 
             logger.lifecycle("Clean Software directory ...")
-            execute 'rm -r ' + project.softwarePath
-            execute 'mkdir ' + project.softwarePath
+            execute 'rm -rf ' + project.softwarePath
+            execute 'mkdir -p ' + project.softwarePath
+
+          //  try {
+          //      execute 'rm -R /dev/shm/aeron'
+          //      execute 'rm -R /dev/shm/aeron-dsing*'
+          //  }catch(Exception e){}
         }
     }
 }
@@ -66,10 +60,6 @@ def copyFiles(def server){
             execute 'rm -r ' +  project.softwarePath + '/deploy.zip'
 
             execute 'find ' +  project.softwarePath + ' -type f -exec chmod 755 {} +'
-            try {
-                execute 'rm -R /dev/shm/aeron'
-                execute 'rm -R /dev/shm/aeron-1133465*'
-            }catch(Exception e){}
         }
     }
 }
