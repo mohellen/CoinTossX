@@ -8,7 +8,7 @@ remotes {
 }
 
 task deployToCHPCServer << {
-    //cleanDirectory(remotes.chpc)
+    cleanDirectory(remotes.chpc)
     copyFiles(remotes.chpc)
 }
 
@@ -16,19 +16,19 @@ task deployToCHPCServer << {
 def cleanDirectory(def server){
     ssh.run {
         session(server) {
-            logger.lifecycle("Stop engines ...")
-            try {
-                execute project.softwarePath + '/scripts/stopAll.sh'
-            }catch(Exception e){}
+          //  logger.lifecycle("Stop engines ...")
+          //  try {
+          //      execute project.softwarePath + '/scripts/stopAll.sh'
+          //  }catch(Exception e){}
 
             logger.lifecycle("Clean Software directory ...")
-            execute 'rm -r ' + project.softwarePath
-            execute 'mkdir ' + project.softwarePath
+            execute 'rm -rf ' + project.softwarePath
+            execute 'mkdir -p ' + project.softwarePath
 
-            try {
-                execute 'rm -R /dev/shm/aeron'
-                execute 'rm -R /dev/shm/aeron-dsing*'
-            }catch(Exception e){}
+          //  try {
+          //      execute 'rm -R /dev/shm/aeron'
+          //      execute 'rm -R /dev/shm/aeron-dsing*'
+          //  }catch(Exception e){}
         }
     }
 }

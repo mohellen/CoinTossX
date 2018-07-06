@@ -10,7 +10,6 @@ remotes {
 task deployToCHPCServer << {
     cleanDirectory(remotes.chpc)
     copyFiles(remotes.chpc)
-	execute 'rm ' + rootProject.projectDir.absolutePath + '/deploy.zip'
 }
 
 
