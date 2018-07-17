@@ -18,4 +18,9 @@ environments {
         ext.envProp = 'chpcServer.properties'
         ext.softwarePath = '/home/amo-hellenbrand/workspace/cointossx'
     }
+
+    eco {
+        ext.envProp = 'ecoServer.properties'
+        ext.softwarePath = '/home/student31/workspace/cointossx'
+    }
 }

@@ -7,7 +7,8 @@ plugins {
 
 ext.envProp = 'local.properties'
 //ext.softwarePath = file(System.getProperty("user.home") + '/workspace/cointossx')
-ext.softwarePath = '/home/amo-hellenbrand/workspace/cointossx'
+//ext.softwarePath = '/home/amo-hellenbrand/workspace/cointossx'
+ext.softwarePath = '/home/student31/workspace/cointossx'
 
 //ext.envProp = 'witsServer.properties'
 //ext.softwarePath = '/hydrahome/1133465/Simulation'
